@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CQO | Chromatic Quantum Architecture</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <!-- Top Navigation Bar -->
+        <header class="top-bar">
+            <div class="brand">
+                <div class="logo-mark">χ</div>
+                <div class="brand-text">
+                    <h1>CQO Architecture</h1>
+                    <span>CRYPTOPIX PRIVATE LIMITED</span>
+                </div>
+            </div>
+            <div class="actions">
+                <button id="reset-btn" class="btn-icon">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Reset Environment
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Grid -->
+        <main class="main-stage">
+
+            <!-- System A Module -->
+            <section class="system-panel sys-a">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span class="dot-indicator"></span>
+                        System Alpha
+                    </div>
+                    <span class="status-tag" id="status-a">COHERENT</span>
+                </div>
+                <div class="canvas-container">
+                    <canvas id="canvas-a" width="400" height="400"></canvas>
+                    <div class="metrics-overlay">
+                        <div class="metric-bar" title="Coherence (Real)">
+                            <span>Cr0</span>
+                            <div class="bar-track">
+                                <div class="bar-value" id="bar-a-0" style="background: var(--state-coh)"></div>
+                            </div>
+                        </div>
+                        <div class="metric-bar" title="Entanglement (Imaginary)">
+                            <span>Cr1</span>
+                            <div class="bar-track">
+                                <div class="bar-value" id="bar-a-1" style="background: var(--state-ent)"></div>
+                            </div>
+                        </div>
+                        <div class="metric-bar" title="Shear (Decoherence)">
+                            <span>Cr2</span>
+                            <div class="bar-track">
+                                <div class="bar-value" id="bar-a-2" style="background: var(--state-dec)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-controls">
+                    <button class="control-btn" onclick="measure('A')">Measure Projection</button>
+                    <button class="control-btn danger" onclick="disturb('A')">Inject Noise</button>
+                </div>
+            </section>
+
+            <!-- Central Hub (Link & Telemetry) -->
+            <div class="central-column">
+                <div class="link-module">
+                    <button id="entangle-btn" class="entangle-trigger">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0l-8-14A2 2 0 0 1 4 4h16a2 2 0 0 1 1.73 3l-8 14z" />
+                        </svg>
+                    </button>
+                    <div class="link-status-text">
+                        <div style="margin-bottom:4px; font-weight:600">QUANTUM LINK</div>
+                        <span id="link-state">DISCONNECTED</span>
+                    </div>
+                </div>
+
+                <div class="telemetry-box">
+                    <div
+                        style="font-size:0.8rem; font-weight:600; margin-bottom:1rem; border-bottom:1px solid #333; padding-bottom:0.5rem">
+                        TELEMETRY</div>
+
+                    <div class="tele-row">
+                        <span>Sys A Vector</span>
+                        <span id="val-a-0" style="color:var(--state-coh)">--</span>
+                    </div>
+                    <div class="tele-row">
+                        <span>Sys B Vector</span>
+                        <span id="val-b-0" style="color:var(--state-coh)">--</span>
+                    </div>
+                    <div class="tele-row">
+                        <span>Bell Corr.</span>
+                        <span id="corr-val">0.000</span>
+                    </div>
+                    <div class="tele-row alert">
+                        <span>Shear Alert</span>
+                        <span id="shear-alert">SAFE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System B Module -->
+            <section class="system-panel sys-b">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span class="dot-indicator"></span>
+                        System Beta
+                    </div>
+                    <span class="status-tag" id="status-b">COHERENT</span>
+                </div>
+                <div class="canvas-container">
+                    <canvas id="canvas-b" width="400" height="400"></canvas>
+                    <div class="metrics-overlay">
+                        <div class="metric-bar">
+                            <span>Cr0</span>
+                            <div class="bar-track">
+                                <div class="bar-value" id="bar-b-0" style="background: var(--state-coh)"></div>
+                            </div>
+                        </div>
+                        <div class="metric-bar">
+                            <span>Cr1</span>
+                            <div class="bar-track">
+                                <div class="bar-value" id="bar-b-1" style="background: var(--state-ent)"></div>
+                            </div>
+                        </div>
+                        <div class="metric-bar">
+                            <span>Cr2</span>
+                            <div class="bar-track">
+                                <div class="bar-value" id="bar-b-2" style="background: var(--state-dec)"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-controls">
+                    <button class="control-btn" onclick="measure('B')">Measure Projection</button>
+                    <button class="control-btn danger" onclick="disturb('B')">Inject Noise</button>
+                </div>
+            </section>
+
+            <!-- QKD Protocol Engine -->
+            <section class="qkd-section">
+                <div class="qkd-actions">
+                    <div style="font-weight:600; font-size:1rem; margin-bottom:0.25rem">QKD Protocol</div>
+                    <div style="font-size:0.8rem; color: #a1a1aa; margin-bottom:1rem">Secure Key Distribution</div>
+                    <button id="run-qkd-btn" class="btn-primary">Generate 128-bit Key</button>
+                </div>
+                <div class="qkd-display" id="qkd-console">
+                    <div class="qkd-meta">
+                        STATUS: <span id="key-status" style="color:#fff">IDLE</span> | QBER: <span
+                            id="qber-val">0.00%</span>
+                    </div>
+                    <div id="key-stream" style="word-break: break-all;">
+                        // WAITING FOR TRANSMISSION...
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="app-footer">
+            <div id="console-log">System Initialized.</div>
+            <div>RUNTIME: CQO_JS_V1</div>
+        </footer>
+
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
